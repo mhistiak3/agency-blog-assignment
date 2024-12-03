@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaPlus, FaCogs, FaUsers, FaSignOutAlt, FaFileAlt } from "react-icons/fa";
 
 const Sidebar = () => {
@@ -6,7 +6,9 @@ const Sidebar = () => {
     <div className="w-64 bg-blue-700 text-white flex flex-col justify-between">
       {/* Top - Logo */}
       <div className="p-6">
-        <h1 className="text-2xl font-bold text-center">AdminPanel</h1>
+        <h1 className="text-2xl font-bold text-center">
+          <Link to="/admin">Agency AdminPanel</Link>
+        </h1>
       </div>
 
       {/* Menu Items */}
