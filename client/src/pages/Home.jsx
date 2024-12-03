@@ -1,6 +1,14 @@
+import Discover from "../components/Discover";
+import Hero from "../components/Hero";
+import Slider from "../components/Slider";
+
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
-export default Home
+    <>
+      <Slider />
+      <Hero />
+      <Discover />
+    </>
+  );
+};
+export default Home;

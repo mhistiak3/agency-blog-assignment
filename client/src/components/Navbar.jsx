@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg">
-      <div className="container mx-auto flex items-center justify-between py-4 px-6">
+      <div className="container mx-auto flex items-center justify-between py-4 px-6 border-b border-gray-800">
         {/* Logo */}
         <div className="text-3xl font-bold tracking-wide">
           <Link to="/" className="hover:text-yellow-300 transition">
