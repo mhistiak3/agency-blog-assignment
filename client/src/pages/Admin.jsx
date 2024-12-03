@@ -6,12 +6,10 @@ const Admin = () => {
   const [serviceCount, setServiceCount] = useState(0);
   const [memberCount, setMemberCount] = useState(0);
 
-  // Example of fetching data (replace with API calls)
   useEffect(() => {
-    // Simulating an API call to get the counts
-    setBlogCount(42); // Example: Get blog count from the backend
-    setServiceCount(12); // Example: Get service count from the backend
-    setMemberCount(8); // Example: Get member count from the backend
+    setBlogCount(42);
+    setServiceCount(12);
+    setMemberCount(8);
   }, []);
 
   return (
