@@ -31,7 +31,7 @@ const ShowMembers = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-2 bg-gray-100 min-h-screen">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Show Members</h2>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">

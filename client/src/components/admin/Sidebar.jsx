@@ -1,11 +1,28 @@
 import { Link, NavLink } from "react-router-dom";
-import { FaPlus, FaCogs, FaUsers, FaSignOutAlt, FaFileAlt } from "react-icons/fa";
+import {
+  FaPlus,
+  FaCogs,
+  FaUsers,
+  FaSignOutAlt,
+  FaFileAlt,
+} from "react-icons/fa";
 
-const Sidebar = () => {
+// eslint-disable-next-line react/prop-types
+const Sidebar = ({ isOpen, setIsOpen }) => {
   return (
-    <div className="w-64 bg-blue-700 text-white flex flex-col justify-between">
+    <div
+      className={`w-64 bg-blue-700 text-white flex flex-col justify-between absolute h-full md:static z-10 ${
+        isOpen ? "" : "hidden"
+      }`}
+    >
       {/* Top - Logo */}
       <div className="p-6">
+        <button
+          className="block md:hidden bg-red-900 py-2 px-4 cursor-pointer mb-2 rounded-sm"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          Hide Panel
+        </button>
         <h1 className="text-2xl font-bold text-center">
           <Link to="/admin">Agency AdminPanel</Link>
         </h1>

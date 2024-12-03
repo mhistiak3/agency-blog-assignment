@@ -63,7 +63,7 @@ const CreateMembers = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
+    <div className="p-2 bg-gray-100 min-h-screen">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Create Member</h2>
       <form
         onSubmit={handleSubmit}
