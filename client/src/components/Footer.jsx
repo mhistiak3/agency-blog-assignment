@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white border-t border-gray-800">
       {/* Big Footer */}
-      <div className="container mx-auto py-10 px-6">
+      <div className="container max-w-7xl mx-auto py-10 px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Column 1 */}
           <div>
@@ -15,7 +15,6 @@ const Footer = () => {
               professional guidance. We provide expert advice, proven
               strategies, and innovative tools to help you create engaging and
               impactful blog posts.
-              
             </p>
           </div>
           {/* Column 2 */}

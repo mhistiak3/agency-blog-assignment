@@ -1,7 +1,7 @@
 const Discover = () => {
   return (
     <section className="py-24 px-6 bg-gray-100 text-center">
-      <div className="max-w-7xl mx-auto">
+      <div className="container max-w-7xl mx-auto">
         <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-6">
           Discover What We Offer
         </h2>

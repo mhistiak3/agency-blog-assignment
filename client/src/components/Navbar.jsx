@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg">
-      <div className="container mx-auto flex items-center justify-between py-4 px-6 border-b border-gray-800">
+      <div className="container max-w-7xl mx-auto flex items-center justify-between py-4 px-6 border-b border-gray-800">
         {/* Logo */}
         <div className="text-3xl font-bold tracking-wide">
           <Link to="/" className="hover:text-yellow-300 transition">
@@ -43,7 +43,7 @@ const Navbar = () => {
 
         {/* Menu Links for Desktop */}
         <ul
-          className={`lg:flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 text-lg mt-4 lg:mt-0 absolute bg-indigo-600 w-full top-12 left-0 p-5 lg:p-0 lg:w-auto lg:bg-transparent lg:static ${
+          className={`lg:flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 text-lg mt-4 lg:mt-0 absolute bg-indigo-600 w-full top-12 left-0 p-5 z-50 lg:p-0 lg:w-auto lg:bg-transparent lg:static ${
             isMenuOpen ? "block" : "hidden"
           }`}
         >

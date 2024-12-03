@@ -43,7 +43,7 @@ const Slider = () => {
         </p>
         <a
           href="#"
-          className="inline-block bg-yellow-300 text-blue-600 py-2 px-6 rounded-lg text-lg font-semibold transition duration-300 hover:bg-yellow-400 hover:text-blue-700"
+          className="inline-block bg-yellow-300 text-gray-800 py-2 px-6 rounded-lg text-lg font-semibold transition duration-300 hover:bg-yellow-400"
         >
           Start Your Journey
         </a>
