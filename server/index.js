@@ -6,6 +6,7 @@ import xss from "xss-clean";
 import hpp from "hpp";
 import cors from "cors";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 import { APP_PORT, CLIENT_URL, MONGO_URL } from "./src/config/config.js";
 import router from "./src/routes/api.routes.js";
 
@@ -19,12 +20,16 @@ mongoose
     console.log(err);
   });
 
+app.use(cookieParser());
 app.use(
   cors({
-    credentials: true,
     origin: ["http://localhost:5173", CLIENT_URL],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 app.use(helmet());
 app.use(mongoSanitize());
 app.use(xss());

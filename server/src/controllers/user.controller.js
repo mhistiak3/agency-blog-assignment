@@ -4,6 +4,8 @@ const loginController = async (req, res) => {
     if (!username || !password) {
       throw new Error("Please fill in all fields");
     }
+
+    res.status(200).json({ message: "Login successful" });
   } catch (error) {
     console.log(error);
     res.status(400).json({ error: error.message });

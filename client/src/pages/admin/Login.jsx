@@ -1,24 +1,37 @@
 import { useState } from "react";
-
+import axios from "axios";
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     // Basic validation (this can be expanded as needed)
-    if (!email || !password) {
+    if (!username || !password) {
       setError("Please fill in all fields.");
       return;
     }
 
-    // Perform login logic (send data to backend or update local state)
-   console.log(import.meta.env.VITE_API_URL);
-   
-
-    
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/v1/login`,
+        {
+          username,
+          password,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Login response:", response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -29,23 +42,22 @@ const Login = () => {
         </h2>
 
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <label
-              htmlFor="email"
+              htmlFor="username"
               className="block text-gray-700 font-medium mb-2"
             >
-              Email Address
+              Username
             </label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              id="username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
+              placeholder="Enter your username"
               required
             />
           </div>
