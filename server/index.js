@@ -30,7 +30,7 @@ app.use(
   })
 );
 
-app.use(helmet());
+app.use(helmet({}));
 app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
