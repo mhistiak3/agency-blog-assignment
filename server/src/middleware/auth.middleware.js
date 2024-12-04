@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { ADMIN_USERNAME } from "../config/config.js";
+import { ADMIN_USERNAME, JWT_SECRET } from "../config/config.js";
 
 export const isAdminAuthenticated = async (req, res, next) => {
   try {
@@ -17,6 +17,6 @@ export const isAdminAuthenticated = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(400).json({ error: error.message,success:false });
+    res.status(400).json({ message: error.message,success:false });
   }
 };

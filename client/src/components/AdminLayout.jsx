@@ -15,16 +15,18 @@ const AdminLayout = () => {
           `${import.meta.env.VITE_API_URL}/api/v1/admin`,
           { withCredentials: true }
         );
-        if (isAdmin?.response?.data?.success) {
+
+        if (isAdmin?.data?.success) {
           setIsLoggedIn(true);
+
         } else {
-          navigate("/admin/login");
+           navigate("/admin/login");
           setIsLoggedIn(false);
         }
       } catch (error) {
         setIsLoggedIn(false);
         navigate("/admin/login");
-        console.log(error?.response?.data);
+        console.log(error);
       }
     })();
     const checkScreenWidth = () => {

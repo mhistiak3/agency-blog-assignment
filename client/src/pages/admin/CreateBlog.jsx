@@ -1,6 +1,6 @@
 import { useState } from "react";
 import imageToDataURL from "../../utils/imageToDataURL";
-
+import axios from "axios";
 const CreateBlog = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -11,7 +11,7 @@ const CreateBlog = () => {
     setImage(file);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title || !description || !image) {
       alert("Please fill in all fields.");
@@ -19,11 +19,26 @@ const CreateBlog = () => {
     }
 
     // image
-    const imageURL =await imageToDataURL(image)
+    const imageURL = await imageToDataURL(image);
+    //  API call
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/v1/admin/blogs`,
+        { title, description, image: imageURL },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-    // Mock API call
-    alert("Blog created successfully!");
-    console.log("Blog Data:", { title, description, imageURL });
+      if (response.data.success) {
+        alert(response.data.message);
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
 
     // Reset form
     setTitle("");

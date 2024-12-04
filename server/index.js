@@ -12,7 +12,9 @@ import router from "./src/routes/api.routes.js";
 
 const app = express();
 mongoose
-  .connect(MONGO_URL)
+  .connect(MONGO_URL, {
+    dbName: "AgencyBlog",
+  })
   .then(() => {
     console.log("Database Connected");
   })
