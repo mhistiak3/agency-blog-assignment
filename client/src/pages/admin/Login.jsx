@@ -14,6 +14,10 @@ const Login = () => {
       return;
     }
 
+    // Perform login logic (send data to backend or update local state)
+   console.log(import.meta.env.VITE_API_URL);
+   
+
     
   };
 

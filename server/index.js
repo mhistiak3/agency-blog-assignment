@@ -6,13 +6,10 @@ import xss from "xss-clean";
 import hpp from "hpp";
 import cors from "cors";
 import mongoose from "mongoose";
-import { APP_PORT, MONGO_URL } from "./src/config/config.js";
-
-
+import { APP_PORT, CLIENT_URL, MONGO_URL } from "./src/config/config.js";
+import router from "./src/routes/api.routes.js";
 
 const app = express();
-
-
 mongoose
   .connect(MONGO_URL)
   .then(() => {
@@ -22,8 +19,12 @@ mongoose
     console.log(err);
   });
 
-
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://localhost:5173", CLIENT_URL],
+  })
+);
 app.use(helmet());
 app.use(mongoSanitize());
 app.use(xss());
@@ -34,13 +35,24 @@ const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 3000 });
 app.use(limiter);
 app.set("etag", false);
 
-
 // routes
-// app.use("/api/v1", router);
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "success",
+    message: "Server is running",
+  });
+});
+app.use("/api/v1", router);
 
-
-// Error Handler
-// app.use(ErrorHandler);
+// Global Error Handler
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.message = err.message || "Internal Server Error";
+  res.status(err.statusCode).json({
+    status: "error",
+    message: err.message,
+  });
+});
 
 const PORT = APP_PORT || 6000;
 app.listen(PORT, function () {
