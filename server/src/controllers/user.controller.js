@@ -25,9 +25,9 @@ const loginController = async (req, res) => {
         sameSite: "none",
         maxAge: 60 * 60 * 1000,
       })
-      .json({ message: "Login successful", accessToken: token });
+      .json({success:true, message: "Login successful", accessToken: token });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ message: error.message });
   }
 };
 

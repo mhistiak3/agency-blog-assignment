@@ -5,6 +5,12 @@ const router = express.Router();
 
 // login
 router.post("/login", loginController);
-router.use(isAdminAuthenticated)
+router.use(isAdminAuthenticated);
+router.get("/admin", (req, res) => {
+  res
+    .status(200)
+    .json({ success: true, message: "You are logged in as admin" });
+});
+router.route("/admin/blogs").get().post().delete();
 
 export default router;
