@@ -1,4 +1,5 @@
 import { useState } from "react";
+import imageToDataURL from "../../utils/imageToDataURL";
 
 const CreateBlog = () => {
   const [title, setTitle] = useState("");
@@ -10,22 +11,19 @@ const CreateBlog = () => {
     setImage(file);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (!title || !description || !image) {
       alert("Please fill in all fields.");
       return;
     }
 
-    // Form data for submission
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-    formData.append("image", image);
+    // image
+    const imageURL =await imageToDataURL(image)
 
     // Mock API call
     alert("Blog created successfully!");
-    console.log("Blog Data:", { title, description, image });
+    console.log("Blog Data:", { title, description, imageURL });
 
     // Reset form
     setTitle("");

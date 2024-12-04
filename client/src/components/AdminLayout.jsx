@@ -23,9 +23,8 @@ const AdminLayout = () => {
         }
       } catch (error) {
         setIsLoggedIn(false);
-         navigate("/admin/login");
-       console.log(error?.response?.data);
-       
+        navigate("/admin/login");
+        console.log(error?.response?.data);
       }
     })();
     const checkScreenWidth = () => {
@@ -40,7 +39,7 @@ const AdminLayout = () => {
     return () => {
       window.removeEventListener("resize", checkScreenWidth);
     };
-  }, []);
+  }, [navigate]);
 
   if (!isLoggedIn) {
     return navigate("/admin/login");
