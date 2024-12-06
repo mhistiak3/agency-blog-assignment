@@ -29,4 +29,21 @@ const createBlogController = async (req, res) => {
   }
 };
 
-export { createBlogController };
+const readBlogsController = async (req, res) => {
+  try {
+    const blogs = await Blog.find({});
+    if (blogs.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No blogs found", success: false });
+    }
+    res.status(200).json({ data: blogs, success: true });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: error.message || "Server Error", success: false });
+  }
+};
+
+
+export { createBlogController, readBlogsController };
