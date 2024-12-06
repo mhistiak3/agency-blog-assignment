@@ -33,19 +33,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <ul className="space-y-4">
           <li>
             <NavLink
-              to="/admin/blogs/list"
-              className={({ isActive }) =>
-                `flex items-center space-x-2 px-4 py-3 rounded-lg hover:bg-blue-600 ${
-                  isActive ? "bg-blue-800" : ""
-                }`
-              }
-            >
-              <FaFileAlt />
-              <span>Show Blogs</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
               to="/admin/blogs/create"
               className={({ isActive }) =>
                 `flex items-center space-x-2 px-4 py-3 rounded-lg hover:bg-blue-600 ${
@@ -59,15 +46,15 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           </li>
           <li>
             <NavLink
-              to="/admin/services/list"
+              to="/admin/blogs/list"
               className={({ isActive }) =>
                 `flex items-center space-x-2 px-4 py-3 rounded-lg hover:bg-blue-600 ${
                   isActive ? "bg-blue-800" : ""
                 }`
               }
             >
-              <FaCogs />
-              <span>Show Services</span>
+              <FaFileAlt />
+              <span>Show Blogs</span>
             </NavLink>
           </li>
           <li>
@@ -85,15 +72,15 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
           </li>
           <li>
             <NavLink
-              to="/admin/members/list"
+              to="/admin/services/list"
               className={({ isActive }) =>
                 `flex items-center space-x-2 px-4 py-3 rounded-lg hover:bg-blue-600 ${
                   isActive ? "bg-blue-800" : ""
                 }`
               }
             >
-              <FaUsers />
-              <span>Show Members</span>
+              <FaCogs />
+              <span>Show Services</span>
             </NavLink>
           </li>
           <li>
@@ -107,6 +94,19 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             >
               <FaPlus />
               <span>Create Members</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/admin/members/list"
+              className={({ isActive }) =>
+                `flex items-center space-x-2 px-4 py-3 rounded-lg hover:bg-blue-600 ${
+                  isActive ? "bg-blue-800" : ""
+                }`
+              }
+            >
+              <FaUsers />
+              <span>Show Members</span>
             </NavLink>
           </li>
         </ul>

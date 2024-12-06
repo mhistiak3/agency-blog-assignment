@@ -22,9 +22,26 @@ const ShowBlogs = () => {
     })();
   }, []);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this blog?")) {
-      setBlogPosts(blogPosts.filter((blog) => blog._id !== id));
+      try {
+        setLoading(true);
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL}/api/v1/admin/blogs`,
+          {
+            data: { id: id },
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setBlogPosts(blogPosts.filter((blog) => blog._id !== id));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 

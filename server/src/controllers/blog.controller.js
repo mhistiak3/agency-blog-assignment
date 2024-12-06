@@ -49,6 +49,9 @@ const readBlogsController = async (req, res) => {
 };
 const deleteBlogController = async (req, res) => {
   const { id } = req.body;
+  if (!id) {
+    throw new Error("Please fill in all fields");
+  }
   try {
     const blog = await Blog.findByIdAndDelete(id);
     if (!blog) {

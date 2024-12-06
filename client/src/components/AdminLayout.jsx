@@ -15,6 +15,7 @@ const AdminLayout = () => {
           `${import.meta.env.VITE_API_URL}/api/v1/admin`,
           { withCredentials: true }
         );
+console.log(isAdmin);
 
         if (isAdmin?.data?.success) {
           setIsLoggedIn(true);
