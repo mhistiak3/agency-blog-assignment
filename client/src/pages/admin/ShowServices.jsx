@@ -23,9 +23,28 @@ const ShowServices = () => {
      })();
    }, []);
 
-  const handleDelete = (id) => {
-    // Delete service logic (API call or local state update)
-    setServices(services.filter((service) => service.id !== id));
+  const handleDelete = async(id) => {
+    if (window.confirm("Are you sure you want to delete this service?")) {
+      try {
+        setLoading(true);
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL}/api/v1/admin/services`,
+          {
+            data: { id: id },
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setServices(services.filter((service) => service._id !== id));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  
   };
 
   const handleUpdate = (id) => {
