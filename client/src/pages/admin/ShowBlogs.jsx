@@ -63,56 +63,43 @@ const ShowBlogs = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
- const handleFormSubmit = async (e) => {
-   e.preventDefault();
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
 
-   try {
-     setLoading(true);
-console.log(formData);
+    try {
+      setLoading(true);
 
-     // Create FormData object
-     const formDatas = new FormData();
-     formDatas.append("id", currentBlog._id); // Pass the blog ID
-     formDatas.append("title", formData.title);
-     formDatas.append("description", formData.description);
-     if (formData.image) {
-       formDatas.append("image", formData.image);
-       formDatas.append("imageID",currentBlog.image.id)
-     }
+      // Create FormData object
+      const formDatas = new FormData();
+      formDatas.append("id", currentBlog._id); // Pass the blog ID
+      formDatas.append("title", formData.title);
+      formDatas.append("description", formData.description);
+      if (formData.image) {
+        formDatas.append("image", formData.image);
+        formDatas.append("imageID", currentBlog.image.id);
+      }
 
-     // Send request to the API
-     const response = await axios.put(
-       `${import.meta.env.VITE_API_URL}/api/v1/admin/blogs`,
-       formDatas,
-       {
-         withCredentials: true,
-         headers: {
-           "Content-Type": "multipart/form-data", // Required for FormData
-         },
-       }
-     );
+      // Send request to the API
+      const response = await axios.put(
+        `${import.meta.env.VITE_API_URL}/api/v1/admin/blogs`,
+        formDatas,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data", // Required for FormData
+          },
+        }
+      );
 
-     if (response.data.success) {
-       setBlogPosts((prev) =>
-         prev.map((blog) =>
-           blog._id === currentBlog._id
-             ? {
-                 ...blog,
-                 title: formData.title,
-                 description: formData.description,
-               }
-             : blog
-         )
-       );
-       setShowPopup(false);
-     }
-   } catch (error) {
-     console.log(error);
-   } finally {
-     setLoading(false);
-   }
- };
-
+      if (response.data.success) {
+        setShowPopup(false);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="p-2 bg-gray-100 min-h-screen">

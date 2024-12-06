@@ -79,7 +79,7 @@ const updateBlogController = async (req, res) => {
       // update blog
       const blog = await Blog.findByIdAndUpdate(
         id,
-        { title, description, image: { id: imageID, url: imageURL } },
+        { title, description, image: { id: imageID, imageURL: imageURL } },
         { new: true }
       );
       if (!blog) {

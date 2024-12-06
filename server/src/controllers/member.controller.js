@@ -70,14 +70,17 @@ const updateMemberController = async (req, res) => {
   try {
     const { id, name, role, imageID, socialLinks } = req.body;
     const image = req.file;
-    const socilaMedia = JSON.parse(socialLinks);
+
+    const socialMedia = JSON.parse(socialLinks);
+   
+    
     if (image) {
       // upload image
       const imageURL = await uploadToCloudinary(image, imageID);
       // update blog
       const blog = await Member.findByIdAndUpdate(
         id,
-        { name, role, socilaMedia, image: { id: imageID, url: imageURL } },
+        { name, role, socialMedia, image: { id: imageID, url: imageURL } },
         { new: true }
       );
       if (!blog) {
@@ -87,7 +90,7 @@ const updateMemberController = async (req, res) => {
       // update blog
       const blog = await Member.findByIdAndUpdate(
         id,
-        { name, role, socilaMedia },
+        { name, role, socialMedia },
         { new: true }
       );
       if (!blog) {
