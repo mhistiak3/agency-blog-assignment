@@ -10,7 +10,7 @@ const ShowServices = () => {
      (async function () {
        try {
          const response = await axios.get(
-           `${import.meta.env.VITE_API_URL}/api/v1/blogs`
+           `${import.meta.env.VITE_API_URL}/api/v1/services`
          );
          if (response.data.success) {
            setServices(response.data.data);
