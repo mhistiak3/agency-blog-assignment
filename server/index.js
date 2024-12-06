@@ -25,7 +25,11 @@ mongoose
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", CLIENT_URL],
+    origin: [
+      "https://agency-blog-assignment.vercel.app",
+      "http://localhost:5173",
+      CLIENT_URL,
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -37,7 +41,7 @@ app.use(mongoSanitize());
 app.use(xss());
 app.use(hpp());
 app.use(express.json());
-app.use(express.urlencoded({  extended: true }));
+app.use(express.urlencoded({ extended: true }));
 const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 3000 });
 app.use(limiter);
 app.set("etag", false);
