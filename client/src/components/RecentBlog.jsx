@@ -36,7 +36,7 @@ const RecentBlog = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {  blogPosts.map((post) => (
             <div
-              key={post.id}
+              key={post._id}
               className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
             >
               <img
@@ -55,7 +55,7 @@ const RecentBlog = () => {
                 </a>
               </div>
             </div>
-            ))}
+            )).slice(0, 4)}
           </div>
         )}
       </div>

@@ -14,7 +14,7 @@ const memberSchema = new mongoose.Schema(
       type: Object,
       required: true,
     },
-    socilaMedia: {
+    socialMedia: {
       type: Object,
       required: true,
     },
