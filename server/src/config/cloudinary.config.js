@@ -29,7 +29,10 @@ cloudinary.config({
  **/
 const uploadToCloudinary = async (image, public_id) => {
   try {
-    const response = await cloudinary.uploader.upload(image, {
+    const dataImage = `data:${image.mimetype};base64,${image.buffer.toString(
+      "base64"
+    )}`;
+    const response = await cloudinary.uploader.upload(dataImage, {
       resource_type: "auto",
       public_id,
     });

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import imageToDataURL from "../../utils/imageToDataURL";
 import axios from "axios";
 const CreateBlog = () => {
   const [title, setTitle] = useState("");
@@ -19,16 +18,21 @@ const CreateBlog = () => {
     }
 
     // image
-    const imageURL = await imageToDataURL(image);
+    // const imageURL = await imageToDataURL(image);
+    const form = new FormData();
+    form.append("image", image);
+    form.append("title", title);
+    form.append("description", description);
+    
     //  API call
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/api/v1/admin/blogs`,
-        { title, description, image: imageURL },
+       form,
         {
           withCredentials: true,
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -100,6 +104,7 @@ const CreateBlog = () => {
           <input
             type="file"
             id="image"
+            name="image"
             accept="image/*"
             onChange={handleImageUpload}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"

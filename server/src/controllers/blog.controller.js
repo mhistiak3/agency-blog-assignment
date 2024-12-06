@@ -4,19 +4,22 @@ import Blog from "../models/blog.model.js";
 //
 const createBlogController = async (req, res) => {
   try {
-    const { title, description, image } = req.body;
+    const { title, description } = req.body;
+    const image = req.file
+    
     // chekc if all fields are filled
     if (!title || !description || !image) {
       throw new Error("Please fill in all fields");
     }
     // upload image
-    const imageURL = await uploadToCloudinary(image, uuid());
+    const id = uuid();
+    const imageURL = await uploadToCloudinary(image, id);
 
     // create blog
     const blog = await Blog.create({
       title,
       description,
-      image: imageURL,
+      image: {id, imageURL},
     });
     if (!blog) {
       throw new Error("Blog not created");
@@ -44,6 +47,44 @@ const readBlogsController = async (req, res) => {
       .json({ message: error.message || "Server Error", success: false });
   }
 };
+const deleteBlogController = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const blog = await Blog.findByIdAndDelete(id);
+    if (!blog) {
+      return res
+        .status(404)
+        .json({ message: "Blog not found", success: false });
+    }
+    res.status(200).json({ message: "Blog deleted successfully", success: true });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: error.message || "Server Error", success: false });
+  }
+};
+
+const updateBlogController = async (req, res) => {
+  try {
+    const { id, title, description, image,imageID } = req.body;
+    // upload image
+    const imageURL = await uploadToCloudinary(image, imageID);
+    // update blog
+    const blog = await Blog.findByIdAndUpdate(
+      id,
+      { title, description, image: {id: imageID, url:imageURL} },
+      { new: true }
+    );
+    if (!blog) {
+      throw new Error("Blog not updated");
+    }
+    res
+      .status(200)
+      .json({ message: "Blog updated successfully", success: true });
+  } catch (error) {
+    res.status(400).json({ message: error.message, success: false });
+  }
+};
 
 
-export { createBlogController, readBlogsController };
+export { createBlogController, readBlogsController, deleteBlogController };
