@@ -5,6 +5,7 @@ import {
   createBlogController,
   deleteBlogController,
   readBlogsController,
+  updateBlogController,
 } from "../controllers/blog.controller.js";
 import { imageUpload } from "../middleware/multer.middleware.js";
 const router = express.Router();
@@ -17,10 +18,11 @@ router.get("/admin", (req, res) => {
     .status(200)
     .json({ success: true, message: "You are logged in as admin" });
 });
-router.post("/admin/blogs", imageUpload, createBlogController);
 router
   .route("/admin/blogs")
   .get(readBlogsController)
-  .delete(deleteBlogController);
+  .post(imageUpload, createBlogController)
+  .delete(deleteBlogController)
+  .put(imageUpload, updateBlogController);
 
 export default router;

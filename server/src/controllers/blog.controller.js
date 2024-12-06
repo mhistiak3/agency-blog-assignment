@@ -5,8 +5,8 @@ import Blog from "../models/blog.model.js";
 const createBlogController = async (req, res) => {
   try {
     const { title, description } = req.body;
-    const image = req.file
-    
+    const image = req.file;
+
     // chekc if all fields are filled
     if (!title || !description || !image) {
       throw new Error("Please fill in all fields");
@@ -19,7 +19,7 @@ const createBlogController = async (req, res) => {
     const blog = await Blog.create({
       title,
       description,
-      image: {id, imageURL},
+      image: { id, imageURL },
     });
     if (!blog) {
       throw new Error("Blog not created");
@@ -56,7 +56,9 @@ const deleteBlogController = async (req, res) => {
         .status(404)
         .json({ message: "Blog not found", success: false });
     }
-    res.status(200).json({ message: "Blog deleted successfully", success: true });
+    res
+      .status(200)
+      .json({ message: "Blog deleted successfully", success: true });
   } catch (error) {
     res
       .status(500)
@@ -66,18 +68,32 @@ const deleteBlogController = async (req, res) => {
 
 const updateBlogController = async (req, res) => {
   try {
-    const { id, title, description, image,imageID } = req.body;
-    // upload image
-    const imageURL = await uploadToCloudinary(image, imageID);
-    // update blog
-    const blog = await Blog.findByIdAndUpdate(
-      id,
-      { title, description, image: {id: imageID, url:imageURL} },
-      { new: true }
-    );
-    if (!blog) {
-      throw new Error("Blog not updated");
+    const { id, title, description, imageID } = req.body;
+    const image = req.file;
+    if (image) {
+      // upload image
+      const imageURL = await uploadToCloudinary(image, imageID);
+      // update blog
+      const blog = await Blog.findByIdAndUpdate(
+        id,
+        { title, description, image: { id: imageID, url: imageURL } },
+        { new: true }
+      );
+      if (!blog) {
+        throw new Error("Blog not updated");
+      }
+    } else {
+      // update blog
+      const blog = await Blog.findByIdAndUpdate(
+        id,
+        { title, description },
+        { new: true }
+      );
+      if (!blog) {
+        throw new Error("Blog not updated");
+      }
     }
+
     res
       .status(200)
       .json({ message: "Blog updated successfully", success: true });
@@ -86,5 +102,9 @@ const updateBlogController = async (req, res) => {
   }
 };
 
-
-export { createBlogController, readBlogsController, deleteBlogController };
+export {
+  createBlogController,
+  readBlogsController,
+  deleteBlogController,
+  updateBlogController,
+};
