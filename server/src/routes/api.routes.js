@@ -19,6 +19,11 @@ const router = express.Router();
 
 // login
 router.post("/login", loginController);
+// public
+router.get("/blogs", readBlogsController);
+router.get("/services", readServicesController);
+router.get("/members", readMembersController);
+
 router.use(isAdminAuthenticated);
 router.get("/admin", (req, res) => {
   res
@@ -27,21 +32,18 @@ router.get("/admin", (req, res) => {
 });
 router
   .route("/admin/blogs")
-  .get(readBlogsController)
   .post(imageUpload, createBlogController)
   .delete(deleteBlogController)
   .put(imageUpload, updateBlogController);
 
 router
   .route("/admin/members")
-  .get(readMembersController)
   .post(imageUpload, createMemberController)
   .delete(deleteMemberController)
   .put(imageUpload, updateMemberController);
 
 router
   .route("/admin/services")
-  .get(readServicesController)
   .post(imageUpload, createServiceController)
   .delete(deleteServiceController)
   .put(imageUpload, updateServiceController);
