@@ -2,28 +2,45 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../../components/Loader";
 const ShowMembers = () => {
-   const [members, setMembers] = useState([]);
-   const [loading, setLoading] = useState(true);
-   useEffect(() => {
-     (async function () {
-       try {
-         const response = await axios.get(
-           `${import.meta.env.VITE_API_URL}/api/v1/members`
-         );
-         if (response.data.success) {
-           setMembers(response.data.data);
-         }
-       } catch (error) {
-         console.log(error);
-       } finally {
-         setLoading(false);
-       }
-     })();
-   }, []);
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    (async function () {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/v1/members`
+        );
+        if (response.data.success) {
+          setMembers(response.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this member?")) {
-      setMembers(members.filter((member) => member._id !== id));
+      try {
+        setLoading(true);
+        await axios.delete(
+          `${import.meta.env.VITE_API_URL}/api/v1/admin/members`,
+          {
+            data: { id: id },
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setMembers(members.filter((member) => member._id !== id));
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
