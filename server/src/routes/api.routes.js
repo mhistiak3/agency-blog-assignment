@@ -14,6 +14,7 @@ import {
   readMembersController,
   updateMemberController,
 } from "../controllers/member.controller.js";
+import { createServiceController, deleteServiceController, readServicesController, updateServiceController } from "../controllers/service.controller.js";
 const router = express.Router();
 
 // login
@@ -37,6 +38,13 @@ router
   .post(imageUpload, createMemberController)
   .delete(deleteMemberController)
   .put(imageUpload, updateMemberController);
+
+router
+  .route("/admin/services")
+  .get(readServicesController)
+  .post(imageUpload, createServiceController)
+  .delete(deleteServiceController)
+  .put(imageUpload, updateServiceController);
 
 
 export default router;
