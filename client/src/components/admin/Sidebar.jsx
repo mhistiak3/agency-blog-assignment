@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   FaPlus,
   FaCogs,
@@ -6,9 +6,26 @@ import {
   FaSignOutAlt,
   FaFileAlt,
 } from "react-icons/fa";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
 const Sidebar = ({ isOpen, setIsOpen }) => {
+  const navigate = useNavigate()
+  const logoutHandler = async () => {
+    // /admin/logout
+    try {
+      await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/admin/logout`, {
+     
+        withCredentials: true,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      navigate("/")
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div
       className={`w-64 bg-blue-700 text-white flex flex-col justify-between absolute h-full md:static z-10 ${
@@ -114,13 +131,13 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
       {/* Bottom - Logout */}
       <div className="p-6">
-        <NavLink
-          to="/admin/logout"
+        <button
+          onClick={logoutHandler}
           className="flex items-center space-x-2 px-4 py-3 rounded-lg bg-red-600 hover:bg-red-700"
         >
           <FaSignOutAlt />
           <span>Logout</span>
-        </NavLink>
+        </button>
       </div>
     </div>
   );

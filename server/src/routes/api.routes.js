@@ -14,7 +14,12 @@ import {
   readMembersController,
   updateMemberController,
 } from "../controllers/member.controller.js";
-import { createServiceController, deleteServiceController, readServicesController, updateServiceController } from "../controllers/service.controller.js";
+import {
+  createServiceController,
+  deleteServiceController,
+  readServicesController,
+  updateServiceController,
+} from "../controllers/service.controller.js";
 const router = express.Router();
 
 // login
@@ -48,5 +53,15 @@ router
   .delete(deleteServiceController)
   .put(imageUpload, updateServiceController);
 
-
+router.get("/admin/logout", (req, res) => {
+  res
+    .clearCookie("agency-blog-token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
+    .json({
+      message: "Logout success",
+    });
+});
 export default router;
