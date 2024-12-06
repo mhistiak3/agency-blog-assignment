@@ -12,7 +12,7 @@ const createMemberController = async (req, res) => {
     if (!name || !role || !image || !socialLinks) {
       throw new Error("Please fill in all fields");
     }
-    const socilaMedia = JSON.parse(socialLinks);
+    const socialMedia = JSON.parse(socialLinks);
 
     // upload image
     const id = uuid();
@@ -22,7 +22,7 @@ const createMemberController = async (req, res) => {
     const member = await Member.create({
       name,
       role,
-      socilaMedia,
+      socialMedia,
       image: { id, imageURL },
     });
     if (!member) {
