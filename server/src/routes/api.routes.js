@@ -25,4 +25,6 @@ router
   .delete(deleteBlogController)
   .put(imageUpload, updateBlogController);
 
+  
+
 export default router;
