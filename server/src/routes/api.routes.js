@@ -29,6 +29,8 @@ router.get("/blogs", readBlogsController);
 router.get("/services", readServicesController);
 router.get("/members", readMembersController);
 
+// admin
+
 router.use(isAdminAuthenticated);
 router.get("/admin", (req, res) => {
   res
