@@ -21,6 +21,17 @@ A full-stack blogging platform where users can create, read, update, and delete 
 
 ---
 
+## Live Links
+
+- **Frontend (Client)**: [Agency Blog Frontend](https://agency-blog-assignment.vercel.app)  
+- **Backend (Server)**: [Agency Blog Backend](https://agency-blog-assignment-45ke.vercel.app)  
+
+### Admin Panel Credentials
+- **Username**: `istiak_ahammad`  
+- **Password**: `qwertyuiop`  
+
+---
+
 ## Tech Stack
 
 ### Frontend
