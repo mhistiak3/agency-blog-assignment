@@ -21,7 +21,7 @@ const Team = () => {
       }
     })();
   }, []);
-console.log(teamMembers);
+
 
   return (
     <section className="py-16 bg-gray-50">

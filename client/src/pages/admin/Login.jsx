@@ -34,7 +34,7 @@ const Login = () => {
         navigate("/admin");
       }
 
-      console.log("Login response:", response.data);
+   
     } catch (error) {
       setError(error.response.data.message);
      
