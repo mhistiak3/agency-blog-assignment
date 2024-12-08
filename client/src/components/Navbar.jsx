@@ -87,14 +87,7 @@ const Navbar = () => {
               Contact
             </Link>
           </li>
-          <li>
-            <Link
-              to="/admin"
-              className="bg-yellow-400 text-gray-700 py-2 px-4 rounded font-medium"
-            >
-              Admin
-            </Link>
-          </li>
+         
         </ul>
       </div>
     </nav>

@@ -2,8 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
-  const [username, setUsername] = useState("istiak_ahammad");
-  const [password, setPassword] = useState("qwertyuiop");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const handleLogin = async (e) => {
